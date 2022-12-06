@@ -1,0 +1,18 @@
+No se insertó el Usuario con nombre: Manuel Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (manuel@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: jose Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (josel@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: Jaime Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (Jaime@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: esteban Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (estebanl@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: carlos Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (carlos@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: estefania Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (estefania@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: Perla Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (Perla@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: cris Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (cris@gmail.com).
+The statement has been terminated.
+No se insertó el Usuario con nombre: carolina Error: Violation of UNIQUE KEY constraint 'UQ__Usuario__A9D10534F3BBE980'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (carolinal@gmail.com).
+The statement has been terminated.

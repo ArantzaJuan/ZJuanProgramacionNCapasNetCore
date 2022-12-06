@@ -1,0 +1,111 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Productos</h2>
+<div class="container">
+    
+    <p>Presione el boton verde para agregar un producto</p>
+    <p></p>
+    <div class="row">
+
+
+        <div style="float:right">
+            @Html.ActionLink("+", "Form", "ProductoController1", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <p>Ingrese el proveedor y nombre del producto que desea consultar</p>
+    @using (Html.BeginForm("GetAll", "ProductoController1", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+        </div>
+        </div>
+        <p></p>
+        <div class="col-md-3">
+            <input type="submit" value="Buscar" class="btn btn-success" />
+        </div>
+    }
+    <p>Para editar un Producto presione el boton amarillo</p>
+    <p>Para eliminar un Producto presione el boton rojo</p>
+    <hr />
+    <div class="row">
+        <table class="tablecenter  table-bordered " id="ddltablapro">
+
+            <thead>
+                <tr>
+                    <th>Editar</th>
+                    <th style ="display :none;"></th>
+                    <th>Nombre</th>
+                    <th>precio Unitario</th>
+                    <th>Stock</th>
+                    <th>Proveedor </th>
+                    <th>Departamento</th>
+                    <th>Descripcio</th>
+                    <th>Imagen</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Producto producto in Model.Productos)
+                {
+                    <tr>
+                         <td style="text-align: center; vertical-align: middle;"><a class="btn btn-warning" href="@Url.Action("Form", "ProductoController1", new { IdProducto = producto.IdProducto })"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                    <td style="display :none;">@producto.IdProducto</td>
+                        <td>@producto.Nombre </td>
+                        <td> @producto.PrecioUnitario</td>
+                        <td> @producto.Stock</td>
+                        <td> @producto.Proveedor.Nombre</td>
+                        <td> @producto.Departamento.Nombre</td>
+                        <td> @producto.Descripcion</td>
+                        @if (producto.Imagen != null)
+                        {
+                            <td><img src="data:image/*;base64,@producto.Imagen" style=" height:100px; width:150px; " /> </td>
+                        }
+                        else
+                        {
+                            <td><img src="~/Imagenes/no.jpg" style=" height:100px; width:100px; " /></td>
+                        }
+
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "ProductoController1", new { IdProducto = producto.IdProducto })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts
+    {
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#ddltablapro').DataTable({
+                searching: false,
+                "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+                autoWidth: false,
+                columnDefs: [
+                    {
+                        targets: ['_all'],
+                        className: 'mdc-data-table__cell',
+                    },
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                },
+            });
+        });
+    </script>
+
+}

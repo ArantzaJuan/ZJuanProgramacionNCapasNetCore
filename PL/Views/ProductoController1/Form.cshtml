@@ -1,0 +1,158 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class=" container">
+    <h2>Form</h2>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "ProductoController1", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+
+                        <div class="col-md-3" style="display :none;">
+
+                            @Html.LabelFor(model => model.IdProducto, new { @class = "hidden" })
+
+                            @Html.TextBoxFor(model => model.IdProducto, new { @class = "hidden form-control" })
+
+                            @Html.ValidationMessageFor(model => model.IdProducto)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.PrecioUnitario)
+                            @Html.TextBoxFor(model => model.PrecioUnitario, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.ValidationMessageFor(model => model.PrecioUnitario)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Stock)
+                            @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.ValidationMessageFor(model => model.Stock)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Proveedor.IdProveedor)
+                            @* @Html.TextBoxFor(model => model.Rol.IdRol, new { @class = "form-control", @id = "txtNombre" })*@
+                            @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Departamento.Area.IdArea)
+                            @* @Html.TextBoxFor(model => model.Rol.IdRol, new { @class = "form-control", @id = "txtNombre" })*@
+                            @Html.DropDownListFor(model => model.Departamento.Area.IdArea, new SelectList(Model.Departamento.Area.Areas, "IdArea", "Nombre"), "Selecciona una opción",  new { id = "ddIarea", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Departamento.Area.IdArea)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Departamento.IdDepartamento)
+                            @if (Model.Departamento.Departamentos == null)
+                            {
+                                @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(string.Empty, "Value", "Text"), "Seleciona un departamento", htmlAttributes: new { id = "ddldepa", @class = "form-control" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona un departamento", htmlAttributes: new { id = "ddldepa", @class = "form-control" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Descripcion)
+                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.ValidationMessageFor(model => model.Descripcion)
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h5 style="color: MediumVioletRed">Fotografia</h5>
+                        @*Ingresar imagen*@
+                        <div class="offset-md-12">
+
+                            @Html.LabelFor(model => model.Imagen)
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image" style="color: MediumVioletRed"></i></span>
+                                <input id="IFImage" type="file" class="form-control" name="IFImage" onchange="validateFile(this), readURL(this);  " />
+                            </div>
+                            @if (Model.Imagen != null)
+                            {
+                                <img id="Imag" src="data:image/*;base64,@Model.Imagen" width="300" height="350" />
+                            }
+                            else
+                            {
+                                <img id="Imag" src="~/Imagenes/no.jpg" width="300" height="300" />
+                            }
+                            @Html.ValidationMessageFor(model => model.Imagen)
+
+                        </div>
+                        @Html.HiddenFor(model => model.Imagen)
+                    </div>
+           
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+                            @Html.ActionLink("Regresar", "GetAll", "Prducto", htmlAttributes: new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#ddIarea").change(function () 
+            {
+                $("#ddldepa").empty();
+                $.ajax
+                    ({
+                        type: 'POST',
+                        url: '@Url.Action("GetDepartamento")',
+                        dataType: 'json',
+                        data: { IdArea: $("#ddIarea").val() },
+                        success: function (departamentos)
+                        {
+                            $("#ddldepa").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                            $.each(departamentos, function (i, departamentos)
+                            {
+                                $("#ddldepa").append('<option value="'
+                                    + departamentos.idDepartamento + '">'
+                                    + departamentos.nombre + '</option>');
+                            });
+                        },
+                        error: function (ex) 
+                        {
+                            alert('Failed.' + ex);
+                        }
+                    });
+                 })
+            })
+</script>
+}
+

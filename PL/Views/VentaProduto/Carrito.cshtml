@@ -1,0 +1,56 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Carrito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Productos</h2>
+<div class="container">
+
+    <h1>Carrito</h1>
+    <div class="row">
+        <table class="tablecenter  table-bordered " id="ddltablapro">
+
+            <thead>
+                <tr>
+                    <th>Editar</th>
+                    <th style="display :none;"></th>
+                    <th>Nombre</th>
+                    <th>precio Unitario</th>
+                    <th>Stock</th>
+                    <th>Proveedor </th>
+                    <th>Departamento</th>
+                    <th>Descripcio</th>
+                    <th>Imagen</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Producto producto in Model.Productos)
+                {
+                    <tr>
+                        <td style="text-align: center; vertical-align: middle;"><a class="btn btn-warning" href="@Url.Action("Form", "ProductoController1", new { IdProducto = producto.IdProducto })"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                        <td style="display :none;">@producto.IdProducto</td>
+                        <td>@producto.Nombre </td>
+                        <td> @producto.PrecioUnitario</td>
+                        <td> @producto.Stock</td>
+                        <td> @producto.Proveedor.Nombre</td>
+                        <td> @producto.Departamento.Nombre</td>
+                        <td> @producto.Descripcion</td>
+                        @if (producto.Imagen != null)
+                        {
+                            <td><img src="data:image/*;base64,@producto.Imagen" style=" height:100px; width:100px; " /> </td>
+                        }
+                        else
+                        {
+                            <td><img src="~/Imagenes/no.jpg" style=" height:100px; width:100px; " /></td>
+                        }
+
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "ProductoController1", new { IdProducto = producto.IdProducto })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
