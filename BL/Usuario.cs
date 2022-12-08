@@ -494,10 +494,46 @@ namespace BL
                     if (usuarios != null)
                     {
                         ML.Usuario usuario = new ML.Usuario();
+                        usuario.Rol = new ML.Rol();
 
+                        usuario.IdUsuario = usuarios.IdUsuario;
+                        usuario.Nombre = usuarios.Nombre;
+                        usuario.ApellidoPaterno = usuarios.ApellidoPaterno;
+                        usuario.ApellidoMaterno = usuarios.ApellidoMaterno;
+                        usuario.Sexo = usuarios.Sexo;
+                        usuario.Telefono = usuarios.Telefono;
+                        usuario.Email = usuarios.Email;
+                        usuario.FechaDeNacimiento = usuarios.FechaDeNacimiento.ToString();
                         usuario.Password = usuarios.Password;
+                        usuario.Celular = usuarios.Celular;
+                        usuario.CURP = usuarios.Curp;
                         usuario.UserName = usuarios.UserName;
-                       
+                        usuario.Rol.IdRol = usuarios.IdRol.Value;
+                        usuario.Rol.NombreRol = usuarios.NombreRol;
+                        usuario.Imagen = usuarios.Imagen;
+
+                        usuario.Direccion = new ML.Direccion();
+
+                        usuario.Direccion.Calle = usuarios.Calle;
+                        usuario.Direccion.NumeroInterior = usuarios.NumeroInterior;
+                        usuario.Direccion.NumeroExterior = usuarios.NumeroExterior;
+
+                        usuario.Direccion.Colonia = new ML.Colonia();
+                        usuario.Direccion.Colonia.IdColonia = usuarios.IdColonia;
+                        usuario.Direccion.Colonia.Nombre = usuarios.NombreColonia;
+
+                        usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                        usuario.Direccion.Colonia.Municipio.IdMunicipio = usuarios.IdMunicipio;
+                        usuario.Direccion.Colonia.Municipio.Nombre = usuarios.NombreMunicipio;
+
+                        usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+                        usuario.Direccion.Colonia.Municipio.Estado.IdEstado = usuarios.IdEstado;
+                        usuario.Direccion.Colonia.Municipio.Estado.Nombre = usuarios.NombreEstado;
+
+
+                        usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
+                        usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais = usuarios.IdPais;
+                        usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre = usuarios.NombrePais;
                         result.Object = usuario;
                         result.Correct = true;
                     }

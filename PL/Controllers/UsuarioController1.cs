@@ -335,18 +335,25 @@ namespace PL.Controllers
 
         //Creacion del login 
       
+        public ActionResult Login () 
+        {
+            
+            return View();
+        }
+        [HttpPost]
         public ActionResult Login (string username, string password) 
         {
             ML.Result result = BL.Usuario.GetByUserName(username);
             if (result.Correct)
             {
-                ML.Usuario usuario = new ML.Usuario();  
-                if(usuario.Password== password) 
-                { 
-                
+                ML.Usuario usuario = new ML.Usuario();
+                if (usuario.Password == password)
+                {
+
 
                 }
             }
+
             return View();
         }
 

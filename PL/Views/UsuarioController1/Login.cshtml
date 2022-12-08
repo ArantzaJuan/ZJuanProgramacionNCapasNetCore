@@ -1,4 +1,4 @@
-﻿
+﻿@model ML.Usuario
 @{
     ViewBag.Title = "login";
     Layout = null;
@@ -16,21 +16,25 @@
                 </svg>Sign In
             </h2>
         </header>
-        
+      
             <form action="#" class="login__form" method="POST">
               
                 <div>
                     <label for="Username">User name</label>
                     <input type="Username" id="Username" name="Username" placeholder="UserName">
                 </div>
-
+            <div class="col-md-3">
+                <label for="Username">User name</label>
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+                
                 <div>
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="password">
                 </div>
-
+           
                 <div>
-                    <input class="button" type="submit" value="Sign In" >
+                <input class="button" type="submit" value="Sign In" href="@Url.Action("GetAll", "UsuarioController1")">
 
                 </div>
                
