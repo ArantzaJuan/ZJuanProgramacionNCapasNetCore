@@ -479,7 +479,44 @@ namespace BL
             return result;
         }
 
+        // Metodo para hacer el username en el login 
 
+        public static ML.Result GetByUserName(string UserName)
+        {
+
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.ZjuanProgramacionNcapasContext context = new DL.ZjuanProgramacionNcapasContext())
+                {
+                    var usuarios = context.Usuarios.FromSqlRaw($"UsuarioGetByUsername {UserName}").AsEnumerable().FirstOrDefault();
+
+                    if (usuarios != null)
+                    {
+                        ML.Usuario usuario = new ML.Usuario();
+
+                        usuario.Password = usuarios.Password;
+                        usuario.UserName = usuarios.UserName;
+                       
+                        result.Object = usuario;
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "El usuario no se pudo mostrar";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
 
 
     }

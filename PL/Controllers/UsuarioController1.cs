@@ -333,6 +333,23 @@ namespace PL.Controllers
             return PartialView("Modal");
         }
 
+        //Creacion del login 
+      
+        public ActionResult Login (string username, string password) 
+        {
+            ML.Result result = BL.Usuario.GetByUserName(username);
+            if (result.Correct)
+            {
+                ML.Usuario usuario = new ML.Usuario();  
+                if(usuario.Password== password) 
+                { 
+                
+
+                }
+            }
+            return View();
+        }
+
 
         //Json para llamar a los drop down list
         public JsonResult GetEstado(int IdPais)
@@ -367,6 +384,8 @@ namespace PL.Controllers
             var result = BL.Usuario.ChangeStatus(IdUsuario, Status);
             return Json(result);
         }
+
+
 
     }
 }
