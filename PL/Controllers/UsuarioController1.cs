@@ -88,7 +88,10 @@ namespace PL.Controllers
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(urlAPi);
-
+                    usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
+                    usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
+                   
+                    usuario.Rol.IdRol = (usuario.Rol.IdRol == null) ? 0 : usuario.Rol.IdRol;
                     var responseTask = client.PostAsJsonAsync<ML.Usuario>("Usuario/GetAll",usuario);
                     //result = bl.Usuario.GetAll();
 

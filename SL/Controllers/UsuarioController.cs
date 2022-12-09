@@ -42,8 +42,11 @@ namespace SL.Controllers
             
 
             ML.Result result = BL.Usuario.GetAll(usuario);
+            ML.Result restrol = BL.Rol.GetAll();
             if (result.Correct)
             {
+                usuario.Usuarios= result.Objects;   
+                usuario.Rol.Roles = restrol.Objects;
                 return Ok(result);
             }
             else
