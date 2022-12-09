@@ -32,13 +32,14 @@ namespace SL.Controllers
         }
         
         [HttpPost("GetAll")]
-        public IActionResult GetAll(string? nombre, string? apellidoPa, int? idRol)
+        public IActionResult GetAll(ML.Usuario usuario )
         {
-            ML.Usuario usuario = new ML.Usuario();
-            usuario.Nombre = (nombre==null)? "" : nombre;
-            usuario.ApellidoPaterno= (apellidoPa == null)? "" : apellidoPa;
+            
             usuario.Rol = new ML.Rol();
-            usuario.Rol.IdRol= (idRol== null) ? 0 :idRol.Value;
+            usuario.Nombre = (usuario.Nombre == null)? "" : usuario.Nombre;
+            usuario.ApellidoPaterno= (usuario.ApellidoPaterno == null)? "" : usuario.ApellidoPaterno;
+            
+            usuario.Rol.IdRol= (usuario.Rol.IdRol == null) ? 0 : usuario.Rol.IdRol.Value;
             
 
             ML.Result result = BL.Usuario.GetAll(usuario);

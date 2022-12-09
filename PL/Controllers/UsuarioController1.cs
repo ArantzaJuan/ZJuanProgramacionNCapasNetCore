@@ -87,11 +87,9 @@ namespace PL.Controllers
                 string urlAPi = _configuration["UrlAPI"];
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(urlAPi);
                     usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
-                    usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
-                   
-                    usuario.Rol.IdRol = (usuario.Rol.IdRol == null) ? 0 : usuario.Rol.IdRol;
+                    client.BaseAddress = new Uri(urlAPi);
+                    
                     var responseTask = client.PostAsJsonAsync<ML.Usuario>("Usuario/GetAll",usuario);
                     //result = bl.Usuario.GetAll();
 
